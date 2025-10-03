@@ -12,6 +12,7 @@ import AppNavbar from './Navbar.vue'
 const navItems = [
   { label: 'Kanban', href: '/kanban', active: true },
   { label: 'Calendar', href: '/calendar' },
-  { label: 'Braindump', href: '/braindump' }
+  { label: 'Braindump', href: '/braindump' },
+  { label: 'Grader', href: '/grader' }
 ]
 </script>
