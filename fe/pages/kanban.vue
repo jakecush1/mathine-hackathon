@@ -231,7 +231,7 @@
               variant="secondary"
               v-if="form === 'Edit'"
               modal="deleteConfirmationModal"
-              @click="setTaskToDelete(kanbanForm.taskid)"
+              @click="openDeleteTask(kanbanForm.taskid)"
             >
               <i class="fa fa-trash text-primary" aria-hidden="true"></i>
               <span class="sr-only">Delete Task</span>
