@@ -1,0 +1,30 @@
+{
+  "name": "neurovation-fe",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@types/node": "^18.17.3",
+    "copyfiles": "^2.4.1",
+    "nuxt": "^3.6.5",
+    "sass-embedded": "^1.87.0"
+  },
+  "dependencies": {
+    "@nuxtjs/proxy": "^2.1.0",
+    "@pinia/nuxt": "^0.4.11",
+    "axios": "^1.9.0",
+    "ical.js": "^2.2.1",
+    "pinia": "^2.1.6",
+    "vuedraggable": "^4.1.0"
+  },
+  "overrides": {
+    "vue": "latest"
+  }
+}
