@@ -16,7 +16,7 @@ app = FastAPI(title="Autograder RAG Service")
 # CORS for Express backend communication
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3002"],  # Express backend
+    allow_origins=["http://localhost:3002","http://localhost:3000"],  # Express backend
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -96,7 +96,7 @@ async def grade_submission(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Grading failed: {str(e)}")
 
-@app.get("/health")
+@app.get("/api/health")
 async def health_check():
     return {"status": "healthy", "service": "autograder-rag"}
 

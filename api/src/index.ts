@@ -45,7 +45,9 @@ app.use(cors(corsOptions));
 // ----------------------------------------------------------------------------------------------
 //             BYPASSES SESSION DATA WITH MOCK DATA (DELETE IN PROD, JUST FOR TESTING)
 // ----------------------------------------------------------------------------------------------
-
+// Debugging: Check if routers are properly imported
+console.log('Braindump router:', typeof braindumpRouter);
+console.log('Autograder router:', typeof autograderRouter);
 // ----------------------------------------------------------------------------------------------
 //                           (DELETE IN PROD, JUST FOR TESTING)
 // ----------------------------------------------------------------------------------------------
@@ -53,6 +55,10 @@ app.use(cors(corsOptions));
 //             ROUTES
 // --------------------------------
 //app.use('/users', userRouter);
+app.use("/autograders", (req, res, next) => {
+  console.log('REACHED AUTOGrader MOUNT POINT:', req.originalUrl);
+  next();
+}, autograderRouter);
 app.use("/taskxtags", taskxtagRouter);
 app.use("/tasks", taskRouter);
 app.use("/tags", tagRouter);
@@ -61,7 +67,6 @@ app.use("/kanbanlabels", kanbanRouter);
 app.use("/calendars", calendarRouter);
 app.use("/images", imageRouter);
 app.use("/braindumps", braindumpRouter);
-app.use("/autograder", autograderRouter);
 
 // --------------------------------
 //      APPLICATION STARTUP

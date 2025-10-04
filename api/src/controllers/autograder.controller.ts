@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
 import FormData from 'form-data';
 import fs from 'fs';
 import path from 'path';
@@ -85,6 +85,7 @@ export class AutograderController {
 
   // Optional: Health check for Python service
   static async healthCheck(req: Request, res: Response, next: NextFunction) {
+    console.log('Health check requested');
     try {
       const healthResponse = await fetch('http://localhost:8000/health');
       const healthStatus = await healthResponse.json();
