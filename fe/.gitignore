@@ -20,6 +20,6 @@ logs
 .npmrc
 
 # Local env files
-#.env
-#.env.*
-#!.env.template
+.env
+.env.*
+!.env.template
