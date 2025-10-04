@@ -1,0 +1,28 @@
+
+============================================================
+GRADING RESULTS
+============================================================
+
+Score: 0.0 / 100.0
+
+SCORE: 0.0/100.0
+
+OVERALL FEEDBACK:
+The submission does not contain any substantive answers to the questions posed in the assignment. While the questions are listed, there are no responses or pseudocode provided for any of the questions. As a result, no points can be awarded.
+
+DETAILED FEEDBACK:
+- **Criterion 1**: 0/25 - The submission does not include any pseudocode or algorithm to determine whether a digraph has a unique topological ordering. 
+- **Criterion 2**: 0/25 - There is no graph drawing or adjacency matrix representation provided for the directed graph G, nor is there any execution of the Floyd-Warshall algorithm.
+- **Criterion 3**: 0/25 - The submission does not address the implications of M2[i, j] = 1 or M2[i, j] = 0 regarding the vertices i and j.
+- **Criterion 4**: 0/25 - There is no iterative DFS procedure provided, nor is there any pseudocode to classify edges as discovery or back edges.
+
+RUBRIC BREAKDOWN:
+- Criterion 1: 0/25 - No algorithm provided.
+- Criterion 2: 0/25 - No graph or adjacency matrix provided.
+- Criterion 3: 0/25 - No analysis of M2 implications provided.
+- Criterion 4: 0/25 - No iterative DFS pseudocode provided.
+
+RECOMMENDATIONS:
+To improve your submission, ensure that you provide complete answers to each question, including pseudocode where required. Review the course materials to guide your responses, and make sure to address all parts of each question thoroughly.
+
+============================================================
