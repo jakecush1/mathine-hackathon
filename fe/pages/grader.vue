@@ -80,34 +80,121 @@
                       required="true"
                     />
                     
-                    <RichText
-                      v-model="autograderForm.assignmentDescription"
-                      name="assignmentDescription"
-                      label="Assignment Description"
-                      placeholder="Paste the full assignment description and requirements..."
-                      required="true"
-                      :height="200"
-                    />
+                    <!-- Assignment Description -->
+                    <div class="mb-3">
+                      <label class="form-label">Assignment Description <span class="text-danger"> </span></label>
+                      <input
+                        type="file"
+                        class="form-control mb-2"
+                        accept=".pdf"
+                        @change="handleFileUpload($event, 'assignmentDescription')"
+                        ref="assignmentDescriptionFile"
+                      />
+                      <div v-if="uploadedFiles.assignmentDescription" class="alert alert-info py-2 mb-2">
+                        <i class="fa fa-file-pdf-o me-2"></i>
+                        <strong>{{ uploadedFiles.assignmentDescription.name }}</strong>
+                        <button 
+                          type="button" 
+                          class="btn-close float-end" 
+                          @click="removeFile('assignmentDescription')"
+                          aria-label="Remove file"
+                        ></button>
+                      </div>
+                      <RichText
+                        v-model="autograderForm.assignmentDescription"
+                        name="assignmentDescription"
+                        placeholder="Paste the full assignment description and requirements or upload PDF above..."
+                        :height="200"
+                      />
+                    </div>
 
-                    <FormInput
-                      v-model="autograderForm.rubric"
-                      type="textarea"
-                      name="rubric"
-                      label="Grading Rubric (Optional)"
-                      placeholder="Paste the grading rubric if available..."
-                      :rows="4"
-                    />
+                    <!-- Rubric -->
+                    <div class="mb-3">
+                      <label class="form-label">Grading Rubric (Optional)  </label>
+                      <input
+                        type="file"
+                        class="form-control mb-2"
+                        accept=".pdf"
+                        @change="handleFileUpload($event, 'rubric')"
+                        ref="rubricFile"
+                      />
+                      <div v-if="uploadedFiles.rubric" class="alert alert-info py-2 mb-2">
+                        <i class="fa fa-file-pdf-o me-2"></i>
+                        <strong>{{ uploadedFiles.rubric.name }}</strong>
+                        <button 
+                          type="button" 
+                          class="btn-close float-end" 
+                          @click="removeFile('rubric')"
+                          aria-label="Remove file"
+                        ></button>
+                      </div>
+                      <FormInput
+                        v-model="autograderForm.rubric"
+                        type="textarea"
+                        name="rubric"
+                        placeholder="Paste the grading rubric or upload PDF above..."
+                        :rows="4"
+                      />
+                    </div>
+
+                    <!-- Answer Key -->
+                    <div class="mb-3">
+                      <label class="form-label">Answer Key (Optional)  </label>
+                      <input
+                        type="file"
+                        class="form-control mb-2"
+                        accept=".pdf"
+                        @change="handleFileUpload($event, 'answerKey')"
+                        ref="answerKeyFile"
+                      />
+                      <div v-if="uploadedFiles.answerKey" class="alert alert-info py-2 mb-2">
+                        <i class="fa fa-file-pdf-o me-2"></i>
+                        <strong>{{ uploadedFiles.answerKey.name }}</strong>
+                        <button 
+                          type="button" 
+                          class="btn-close float-end" 
+                          @click="removeFile('answerKey')"
+                          aria-label="Remove file"
+                        ></button>
+                      </div>
+                      <FormInput
+                        v-model="autograderForm.answerKey"
+                        type="textarea"
+                        name="answerKey"
+                        placeholder="Paste the Answer Key or upload PDF above..."
+                        :rows="4"
+                      />
+                    </div>
                   </div>
                   
                   <div class="col-md-6">
-                    <RichText
-                      v-model="autograderForm.studentSubmission"
-                      name="studentSubmission"
-                      label="Your Submission"
-                      placeholder="Paste your assignment submission here..."
-                      required="true"
-                      :height="300"
-                    />
+                    <!-- Student Submission -->
+                    <div class="mb-3">
+                      <label class="form-label">Your Submission <span class="text-danger"> </span></label>
+                      <input
+                        type="file"
+                        class="form-control mb-2"
+                        accept=".pdf"
+                        @change="handleFileUpload($event, 'studentSubmission')"
+                        ref="studentSubmissionFile"
+                      />
+                      <div v-if="uploadedFiles.studentSubmission" class="alert alert-info py-2 mb-2">
+                        <i class="fa fa-file-pdf-o me-2"></i>
+                        <strong>{{ uploadedFiles.studentSubmission.name }}</strong>
+                        <button 
+                          type="button" 
+                          class="btn-close float-end" 
+                          @click="removeFile('studentSubmission')"
+                          aria-label="Remove file"
+                        ></button>
+                      </div>
+                      <RichText
+                        v-model="autograderForm.studentSubmission"
+                        name="studentSubmission"
+                        placeholder="Paste your assignment submission or upload PDF above..."
+                        :height="300"
+                      />
+                    </div>
 
                     <FormInput
                       v-model="autograderForm.courseMaterials"
@@ -224,13 +311,62 @@ const autograderForm = ref({
   courseName: "",
   assignmentDescription: "",
   rubric: "",
+  answerKey: "",
   studentSubmission: "",
   courseMaterials: ""
+});
+
+// File upload state
+const uploadedFiles = ref({
+  assignmentDescription: null as File | null,
+  rubric: null as File | null,
+  answerKey: null as File | null,
+  studentSubmission: null as File | null
 });
 
 const isGrading = ref(false);
 const gradingResults = ref<IGradingResult | null>(null);
 const gradingHistory = ref<IGradingHistory[]>([]);
+
+// Refs for file inputs
+const assignmentDescriptionFile = ref<HTMLInputElement | null>(null);
+const rubricFile = ref<HTMLInputElement | null>(null);
+const answerKeyFile = ref<HTMLInputElement | null>(null);
+const studentSubmissionFile = ref<HTMLInputElement | null>(null);
+
+// Handle file upload
+const handleFileUpload = (event: Event, fieldName: string) => {
+  const target = event.target as HTMLInputElement;
+  const file = target.files?.[0];
+  
+  if (file && file.type === 'application/pdf') {
+    uploadedFiles.value[fieldName] = file;
+    console.log(`File uploaded for ${fieldName}:`, file.name);
+  } else if (file) {
+    alert('Please upload a PDF file');
+    target.value = '';
+  }
+};
+
+// Remove uploaded file
+const removeFile = (fieldName: string) => {
+  uploadedFiles.value[fieldName] = null;
+  
+  // Clear the file input
+  const fileInputMap = {
+    assignmentDescription: assignmentDescriptionFile,
+    rubric: rubricFile,
+    answerKey: answerKeyFile,
+    studentSubmission: studentSubmissionFile
+  };
+  
+  const inputRef = fileInputMap[fieldName];
+  if (inputRef.value) {
+    inputRef.value.value = '';
+  }
+  
+  console.log(`File removed for ${fieldName}`);
+};
 
 // Submit autograder form
 const submitAutograderForm = async (e: Event) => {
@@ -238,18 +374,31 @@ const submitAutograderForm = async (e: Event) => {
   isGrading.value = true;
 
   try {
-    // Call the autograder API
-    const response = await autograderApi.gradeSubmission(autograderForm.value);
-    gradingResults.value = response.data;
+    // Log uploaded files for now (no parsing yet)
+    console.log('=== Submitted Form Data ===');
+    console.log('Text fields:', autograderForm.value);
+    console.log('Uploaded files:', {
+      assignmentDescription: uploadedFiles.value.assignmentDescription?.name || 'none',
+      rubric: uploadedFiles.value.rubric?.name || 'none',
+      answerKey: uploadedFiles.value.answerKey?.name || 'none',
+      studentSubmission: uploadedFiles.value.studentSubmission?.name || 'none'
+    });
+
+    // Call the autograder API (still using original endpoint)
+    const response = await $fetch("/api/grade", {
+      method: "POST",
+      body: autograderForm.value,
+    });
+    gradingResults.value = response;
     
     // Add to history
     const historyItem: IGradingHistory = {
       id: Date.now().toString(),
       courseName: autograderForm.value.courseName,
       assignmentDescription: autograderForm.value.assignmentDescription,
-      estimatedGrade: gradingResults.value.estimatedGrade,
+      estimatedGrade: response.estimatedGrade,
       timestamp: new Date(),
-      fullResults: gradingResults.value
+      fullResults: response
     };
     
     gradingHistory.value.unshift(historyItem);
@@ -274,15 +423,31 @@ const resetAutograderForm = () => {
     courseName: "",
     assignmentDescription: "",
     rubric: "",
+    answerKey: "",
     studentSubmission: "",
     courseMaterials: ""
   };
+  
+  // Clear all uploaded files
+  uploadedFiles.value = {
+    assignmentDescription: null,
+    rubric: null,
+    answerKey: null,
+    studentSubmission: null
+  };
+  
+  // Clear file inputs
+  if (assignmentDescriptionFile.value) assignmentDescriptionFile.value.value = '';
+  if (rubricFile.value) rubricFile.value.value = '';
+  if (answerKeyFile.value) answerKeyFile.value.value = '';
+  if (studentSubmissionFile.value) studentSubmissionFile.value.value = '';
 };
 
 // Grade another submission
 const gradeNewSubmission = () => {
   resultsModalRef.value?.close();
   resetAutograderForm();
+  console.log(autograderForm);
   // Scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
 };
@@ -376,5 +541,25 @@ onMounted(() => {
 .card-header {
   background-color: #f8f9fa;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.alert i {
+  color: #0c5460;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
 }
 </style>
