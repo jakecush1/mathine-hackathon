@@ -7,19 +7,23 @@ export default defineNuxtConfig({
   //    cert: "./cert.pem",
   //  },
   //},
+    css: [
+    'bootstrap/dist/css/bootstrap.css', // This loads the CSS
+  ],
 
   // ----------------------------------------------------------------------------------------------
   //                           (FIX IN PROD, JUST FOR GETTING IT WORKING)
   // ----------------------------------------------------------------------------------------------
-
-  
 
   runtimeConfig: {
     backend_url: "http://localhost:3002",
   },
 
   // Modules
-  modules: ["@pinia/nuxt"],
+  modules: [
+    "@pinia/nuxt"
+  ],
 
   compatibilityDate: "2025-04-29",
 });
+
