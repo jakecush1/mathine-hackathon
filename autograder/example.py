@@ -1,9 +1,9 @@
 """Example usage of the autograder."""
 
 import io
-from autograder.config import AutograderConfig
-from autograder.pdf_processor import PDFProcessor
-from autograder.grader import Autograder
+from config import AutograderConfig
+from pdf_processor import PDFProcessor
+from grader import Autograder
 
 
 def example_usage():

@@ -5,7 +5,7 @@ from typing import List
 import PyPDF2
 import structlog
 
-from autograder.models.document import Document, DocumentChunk
+from models.document import Document, DocumentChunk
 
 logger = structlog.get_logger(__name__)
 

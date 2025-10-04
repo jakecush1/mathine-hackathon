@@ -4,7 +4,7 @@ import numpy as np
 from typing import List, Dict, Optional
 import structlog
 
-from autograder.models.document import DocumentChunk
+from models.document import DocumentChunk
 
 logger = structlog.get_logger(__name__)
 

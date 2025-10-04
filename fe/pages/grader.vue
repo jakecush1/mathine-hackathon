@@ -2,8 +2,8 @@
   <PageMain :title="pageTitle" :layout="pageLayout" v-if="!isLoggedIn">
     <Alert title="You are not logged in!" classes="alert-danger">
       <p>
-        To use this tool you need to sign in to your account. Sign in via
-        sign in button from the top right.
+        To use this tool you need to sign in to your account. Sign in via sign
+        in button from the top right.
       </p>
     </Alert>
   </PageMain>
@@ -17,22 +17,33 @@
     >
       <div v-if="gradingResults">
         <div class="mb-4">
-          <h4 class="d-inline">Estimated Grade: </h4>
-          <span class="badge" :class="getGradeBadgeClass(gradingResults.estimatedGrade)">
+          <h4 class="d-inline">Estimated Grade:</h4>
+          <span
+            class="badge"
+            :class="getGradeBadgeClass(gradingResults.estimatedGrade)"
+          >
             {{ gradingResults.estimatedGrade }}%
           </span>
         </div>
-        
+
         <div class="mb-3">
           <h5>Feedback:</h5>
-          <div class="feedback-content p-3 bg-light rounded" v-html="formatFeedback(gradingResults.feedback)"></div>
+          <div
+            class="feedback-content p-3 bg-light rounded"
+            v-html="formatFeedback(gradingResults.feedback)"
+          ></div>
         </div>
-        
+
         <div v-if="gradingResults.improvementSuggestions">
           <h5>Improvement Suggestions:</h5>
           <ul class="list-group">
-            <li v-for="(suggestion, index) in gradingResults.improvementSuggestions" 
-                :key="index" class="list-group-item">
+            <li
+              v-for="(
+                suggestion, index
+              ) in gradingResults.improvementSuggestions"
+              :key="index"
+              class="list-group-item"
+            >
               {{ suggestion }}
             </li>
           </ul>
@@ -57,7 +68,8 @@
             <div class="card-header">
               <h4>Autograder Assistant</h4>
               <p class="mb-0 text-muted">
-                Get course-specific feedback and estimated grades for your assignments
+                Get course-specific feedback and estimated grades for your
+                assignments
               </p>
             </div>
             <div class="card-body">
@@ -79,23 +91,33 @@
                       placeholder="e.g., Computer Science 101"
                       required="true"
                     />
-                    
+
                     <!-- Assignment Description -->
                     <div class="mb-3">
-                      <label class="form-label">Assignment Description <span class="text-danger"> </span></label>
+                      <label class="form-label"
+                        >Assignment Description
+                        <span class="text-danger"> </span
+                      ></label>
                       <input
                         type="file"
                         class="form-control mb-2"
                         accept=".pdf"
-                        @change="handleFileUpload($event, 'assignmentDescription')"
+                        @change="
+                          handleFileUpload($event, 'assignmentDescription')
+                        "
                         ref="assignmentDescriptionFile"
                       />
-                      <div v-if="uploadedFiles.assignmentDescription" class="alert alert-info py-2 mb-2">
+                      <div
+                        v-if="uploadedFiles.assignmentDescription"
+                        class="alert alert-info py-2 mb-2"
+                      >
                         <i class="fa fa-file-pdf-o me-2"></i>
-                        <strong>{{ uploadedFiles.assignmentDescription.name }}</strong>
-                        <button 
-                          type="button" 
-                          class="btn-close float-end" 
+                        <strong>{{
+                          uploadedFiles.assignmentDescription.name
+                        }}</strong>
+                        <button
+                          type="button"
+                          class="btn-close float-end"
                           @click="removeFile('assignmentDescription')"
                           aria-label="Remove file"
                         ></button>
@@ -110,7 +132,9 @@
 
                     <!-- Rubric -->
                     <div class="mb-3">
-                      <label class="form-label">Grading Rubric (Optional)  </label>
+                      <label class="form-label"
+                        >Grading Rubric (Optional)
+                      </label>
                       <input
                         type="file"
                         class="form-control mb-2"
@@ -118,12 +142,15 @@
                         @change="handleFileUpload($event, 'rubric')"
                         ref="rubricFile"
                       />
-                      <div v-if="uploadedFiles.rubric" class="alert alert-info py-2 mb-2">
+                      <div
+                        v-if="uploadedFiles.rubric"
+                        class="alert alert-info py-2 mb-2"
+                      >
                         <i class="fa fa-file-pdf-o me-2"></i>
                         <strong>{{ uploadedFiles.rubric.name }}</strong>
-                        <button 
-                          type="button" 
-                          class="btn-close float-end" 
+                        <button
+                          type="button"
+                          class="btn-close float-end"
                           @click="removeFile('rubric')"
                           aria-label="Remove file"
                         ></button>
@@ -139,7 +166,7 @@
 
                     <!-- Answer Key -->
                     <div class="mb-3">
-                      <label class="form-label">Answer Key (Optional)  </label>
+                      <label class="form-label">Answer Key (Optional) </label>
                       <input
                         type="file"
                         class="form-control mb-2"
@@ -147,12 +174,15 @@
                         @change="handleFileUpload($event, 'answerKey')"
                         ref="answerKeyFile"
                       />
-                      <div v-if="uploadedFiles.answerKey" class="alert alert-info py-2 mb-2">
+                      <div
+                        v-if="uploadedFiles.answerKey"
+                        class="alert alert-info py-2 mb-2"
+                      >
                         <i class="fa fa-file-pdf-o me-2"></i>
                         <strong>{{ uploadedFiles.answerKey.name }}</strong>
-                        <button 
-                          type="button" 
-                          class="btn-close float-end" 
+                        <button
+                          type="button"
+                          class="btn-close float-end"
                           @click="removeFile('answerKey')"
                           aria-label="Remove file"
                         ></button>
@@ -166,11 +196,13 @@
                       />
                     </div>
                   </div>
-                  
+
                   <div class="col-md-6">
                     <!-- Student Submission -->
                     <div class="mb-3">
-                      <label class="form-label">Your Submission <span class="text-danger"> </span></label>
+                      <label class="form-label"
+                        >Your Submission <span class="text-danger"> </span
+                      ></label>
                       <input
                         type="file"
                         class="form-control mb-2"
@@ -178,12 +210,17 @@
                         @change="handleFileUpload($event, 'studentSubmission')"
                         ref="studentSubmissionFile"
                       />
-                      <div v-if="uploadedFiles.studentSubmission" class="alert alert-info py-2 mb-2">
+                      <div
+                        v-if="uploadedFiles.studentSubmission"
+                        class="alert alert-info py-2 mb-2"
+                      >
                         <i class="fa fa-file-pdf-o me-2"></i>
-                        <strong>{{ uploadedFiles.studentSubmission.name }}</strong>
-                        <button 
-                          type="button" 
-                          class="btn-close float-end" 
+                        <strong>{{
+                          uploadedFiles.studentSubmission.name
+                        }}</strong>
+                        <button
+                          type="button"
+                          class="btn-close float-end"
                           @click="removeFile('studentSubmission')"
                           aria-label="Remove file"
                         ></button>
@@ -208,18 +245,18 @@
                 </div>
 
                 <div class="mt-4">
-                  <Button 
-                    type="submit" 
-                    variant="primary" 
+                  <Button
+                    type="submit"
+                    variant="primary"
                     :disabled="isGrading"
                     class="me-3"
                   >
                     <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                    {{ isGrading ? 'Grading...' : 'Grade Submission' }}
+                    {{ isGrading ? "Grading..." : "Grade Submission" }}
                   </Button>
-                  <Button 
-                    type="button" 
-                    variant="secondary" 
+                  <Button
+                    type="button"
+                    variant="secondary"
                     @click="resetAutograderForm"
                   >
                     Reset Form
@@ -253,11 +290,14 @@
                   <tbody>
                     <tr v-for="grading in gradingHistory" :key="grading.id">
                       <td>{{ grading.courseName }}</td>
-                      <td class="text-truncate" style="max-width: 200px;">
+                      <td class="text-truncate" style="max-width: 200px">
                         {{ truncateText(grading.assignmentDescription, 50) }}
                       </td>
                       <td>
-                        <span class="badge" :class="getGradeBadgeClass(grading.estimatedGrade)">
+                        <span
+                          class="badge"
+                          :class="getGradeBadgeClass(grading.estimatedGrade)"
+                        >
                           {{ grading.estimatedGrade }}%
                         </span>
                       </td>
@@ -294,7 +334,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import type { IGradingResult, IGradingHistory } from "~/types/autograder";
-import autograderApi from "~/api/autograderService";
+import autograderService from "~/api/autograderService"; // Updated import
 
 const resultsModalRef = ref(null);
 
@@ -313,7 +353,7 @@ const autograderForm = ref({
   rubric: "",
   answerKey: "",
   studentSubmission: "",
-  courseMaterials: ""
+  courseMaterials: "",
 });
 
 // File upload state
@@ -321,7 +361,7 @@ const uploadedFiles = ref({
   assignmentDescription: null as File | null,
   rubric: null as File | null,
   answerKey: null as File | null,
-  studentSubmission: null as File | null
+  studentSubmission: null as File | null,
 });
 
 const isGrading = ref(false);
@@ -338,33 +378,33 @@ const studentSubmissionFile = ref<HTMLInputElement | null>(null);
 const handleFileUpload = (event: Event, fieldName: string) => {
   const target = event.target as HTMLInputElement;
   const file = target.files?.[0];
-  
-  if (file && file.type === 'application/pdf') {
+
+  if (file && file.type === "application/pdf") {
     uploadedFiles.value[fieldName] = file;
     console.log(`File uploaded for ${fieldName}:`, file.name);
   } else if (file) {
-    alert('Please upload a PDF file');
-    target.value = '';
+    alert("Please upload a PDF file");
+    target.value = "";
   }
 };
 
 // Remove uploaded file
 const removeFile = (fieldName: string) => {
   uploadedFiles.value[fieldName] = null;
-  
+
   // Clear the file input
   const fileInputMap = {
     assignmentDescription: assignmentDescriptionFile,
     rubric: rubricFile,
     answerKey: answerKeyFile,
-    studentSubmission: studentSubmissionFile
+    studentSubmission: studentSubmissionFile,
   };
-  
+
   const inputRef = fileInputMap[fieldName];
   if (inputRef.value) {
-    inputRef.value.value = '';
+    inputRef.value.value = "";
   }
-  
+
   console.log(`File removed for ${fieldName}`);
 };
 
@@ -374,44 +414,81 @@ const submitAutograderForm = async (e: Event) => {
   isGrading.value = true;
 
   try {
-    // Log uploaded files for now (no parsing yet)
-    console.log('=== Submitted Form Data ===');
-    console.log('Text fields:', autograderForm.value);
-    console.log('Uploaded files:', {
-      assignmentDescription: uploadedFiles.value.assignmentDescription?.name || 'none',
-      rubric: uploadedFiles.value.rubric?.name || 'none',
-      answerKey: uploadedFiles.value.answerKey?.name || 'none',
-      studentSubmission: uploadedFiles.value.studentSubmission?.name || 'none'
-    });
+    // Check if we have any files uploaded
+    const hasFiles = Object.values(uploadedFiles.value).some(
+      (file) => file !== null
+    );
 
-    // Call the autograder API (still using original endpoint)
-    const response = await $fetch("/api/grade", {
-      method: "POST",
-      body: autograderForm.value,
-    });
-    gradingResults.value = response;
-    
+    if (hasFiles) {
+      // Use file upload method
+      const formData = new FormData();
+
+      // Append text fields
+      formData.append("courseName", autograderForm.value.courseName);
+      formData.append(
+        "assignmentDescription",
+        autograderForm.value.assignmentDescription
+      );
+      formData.append("rubric", autograderForm.value.rubric || "");
+      formData.append("answerKey", autograderForm.value.answerKey || "");
+      formData.append(
+        "studentSubmission",
+        autograderForm.value.studentSubmission
+      );
+      formData.append(
+        "courseMaterials",
+        autograderForm.value.courseMaterials || ""
+      );
+
+      // Append files
+      if (uploadedFiles.value.assignmentDescription) {
+        formData.append(
+          "assignmentDescriptionFile",
+          uploadedFiles.value.assignmentDescription
+        );
+      }
+      if (uploadedFiles.value.rubric) {
+        formData.append("rubricFile", uploadedFiles.value.rubric);
+      }
+      if (uploadedFiles.value.answerKey) {
+        formData.append("answerKeyFile", uploadedFiles.value.answerKey);
+      }
+      if (uploadedFiles.value.studentSubmission) {
+        formData.append(
+          "studentSubmissionFile",
+          uploadedFiles.value.studentSubmission
+        );
+      }
+
+      const response = await autograderService.gradeSubmissionWithFiles(
+        formData
+      );
+      gradingResults.value = response.data;
+    } else {
+      // Use text-only method
+      const response = await autograderService.gradeSubmission(
+        autograderForm.value
+      );
+      gradingResults.value = response.data;
+    }
+
     // Add to history
     const historyItem: IGradingHistory = {
       id: Date.now().toString(),
       courseName: autograderForm.value.courseName,
       assignmentDescription: autograderForm.value.assignmentDescription,
-      estimatedGrade: response.estimatedGrade,
+      estimatedGrade: gradingResults.value.estimatedGrade,
       timestamp: new Date(),
-      fullResults: response
+      fullResults: gradingResults.value,
     };
-    
+
     gradingHistory.value.unshift(historyItem);
-    
-    // Save to localStorage (or your preferred storage)
     saveGradingHistory();
-    
-    // Show results modal
     resultsModalRef.value?.open();
-    
   } catch (error) {
     console.error("Grading failed:", error);
-    // You might want to show an error message to the user
+    // You can show a user-friendly error message here
+    alert("Grading failed. Please check your connection and try again.");
   } finally {
     isGrading.value = false;
   }
@@ -425,31 +502,31 @@ const resetAutograderForm = () => {
     rubric: "",
     answerKey: "",
     studentSubmission: "",
-    courseMaterials: ""
+    courseMaterials: "",
   };
-  
+
   // Clear all uploaded files
   uploadedFiles.value = {
     assignmentDescription: null,
     rubric: null,
     answerKey: null,
-    studentSubmission: null
+    studentSubmission: null,
   };
-  
+
   // Clear file inputs
-  if (assignmentDescriptionFile.value) assignmentDescriptionFile.value.value = '';
-  if (rubricFile.value) rubricFile.value.value = '';
-  if (answerKeyFile.value) answerKeyFile.value.value = '';
-  if (studentSubmissionFile.value) studentSubmissionFile.value.value = '';
+  if (assignmentDescriptionFile.value)
+    assignmentDescriptionFile.value.value = "";
+  if (rubricFile.value) rubricFile.value.value = "";
+  if (answerKeyFile.value) answerKeyFile.value.value = "";
+  if (studentSubmissionFile.value) studentSubmissionFile.value.value = "";
 };
 
 // Grade another submission
 const gradeNewSubmission = () => {
   resultsModalRef.value?.close();
   resetAutograderForm();
-  console.log(autograderForm);
   // Scroll to top
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
 // View grading details
@@ -460,43 +537,56 @@ const viewGradingDetails = (grading: IGradingHistory) => {
 
 // Delete grading from history
 const deleteGrading = (id: string) => {
-  gradingHistory.value = gradingHistory.value.filter(item => item.id !== id);
+  gradingHistory.value = gradingHistory.value.filter((item) => item.id !== id);
   saveGradingHistory();
 };
 
 // Save grading history to localStorage
 const saveGradingHistory = () => {
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('autograderHistory', JSON.stringify(gradingHistory.value));
+  if (typeof window !== "undefined") {
+    localStorage.setItem(
+      "autograderHistory",
+      JSON.stringify(gradingHistory.value)
+    );
   }
 };
 
 // Load grading history from localStorage
 const loadGradingHistory = () => {
-  if (typeof window !== 'undefined') {
-    const saved = localStorage.getItem('autograderHistory');
+  if (typeof window !== "undefined") {
+    const saved = localStorage.getItem("autograderHistory");
     if (saved) {
       gradingHistory.value = JSON.parse(saved);
     }
   }
 };
 
-// Utility functions
+// Check service health on component mount
+onMounted(() => {
+  loadGradingHistory();
+
+  // Optional: Check if autograder service is available
+  autograderService
+    .healthCheck()
+    .then(() => console.log("Autograder service is healthy"))
+    .catch(() => console.warn("Autograder service is unavailable"));
+});
+
+// Utility functions (keep your existing ones)
 const getGradeBadgeClass = (grade: number) => {
-  if (grade >= 90) return 'bg-success';
-  if (grade >= 80) return 'bg-primary';
-  if (grade >= 70) return 'bg-warning';
-  return 'bg-danger';
+  if (grade >= 90) return "bg-success";
+  if (grade >= 80) return "bg-primary";
+  if (grade >= 70) return "bg-warning";
+  return "bg-danger";
 };
 
 const formatFeedback = (feedback: string) => {
-  // Simple formatting - you might want to use a more robust solution
-  return feedback.replace(/\n/g, '<br>');
+  return feedback.replace(/\n/g, "<br>");
 };
 
 const truncateText = (text: string, maxLength: number) => {
-  if (!text) return '';
-  return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+  if (!text) return "";
+  return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 };
 
 const formatDate = (date: Date | string) => {
@@ -505,14 +595,9 @@ const formatDate = (date: Date | string) => {
     day: "numeric",
     year: "numeric",
     hour: "2-digit",
-    minute: "2-digit"
+    minute: "2-digit",
   });
 };
-
-// Lifecycle hooks
-onMounted(() => {
-  loadGradingHistory();
-});
 </script>
 
 <style scoped>

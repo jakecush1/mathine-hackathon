@@ -4,7 +4,7 @@ from typing import List
 import openai
 import structlog
 
-from autograder.models.document import DocumentChunk
+from models.document import DocumentChunk
 
 logger = structlog.get_logger(__name__)
 

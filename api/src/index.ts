@@ -11,6 +11,7 @@ import kanbanRouter from "./routes/kanbanlabel.routes";
 import calendarRouter from "./routes/calendar.routes";
 import imageRouter from "./routes/image.routes";
 import braindumpRouter from "./routes/braindump.routes";
+import autograderRouter from "./routes/autograder.routes";
 
 dotenvConfig({ path: "ContainerEnv" });
 
@@ -60,6 +61,7 @@ app.use("/kanbanlabels", kanbanRouter);
 app.use("/calendars", calendarRouter);
 app.use("/images", imageRouter);
 app.use("/braindumps", braindumpRouter);
+app.use("/autograder", autograderRouter);
 
 // --------------------------------
 //      APPLICATION STARTUP

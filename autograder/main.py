@@ -4,9 +4,9 @@ import argparse
 import structlog
 from pathlib import Path
 
-from autograder.config import AutograderConfig
-from autograder.pdf_processor import PDFProcessor
-from autograder.grader import Autograder
+from config import AutograderConfig
+from pdf_processor import PDFProcessor
+from grader import Autograder
 
 logger = structlog.get_logger(__name__)
 

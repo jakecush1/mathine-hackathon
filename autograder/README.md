@@ -1,3 +1,12 @@
+## set root to autograder 
+```bash
+pip install -r requirements.txt
+python autograder_service.py
+```
+### Structure is overridden by Aarjan so might be inconsistencies, but structure is pretty straightforward 
+
+
+
 # Autograder with RAG
 
 An intelligent autograding system that uses Retrieval-Augmented Generation (RAG) to grade student submissions with context from course materials.

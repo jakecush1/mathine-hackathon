@@ -4,10 +4,10 @@ from typing import List, Dict
 import openai
 import structlog
 
-from autograder.config import AutograderConfig
-from autograder.models.document import Document, GradingResult
-from autograder.vector_store import SimpleVectorStore
-from autograder.embeddings import EmbeddingGenerator
+from config import AutograderConfig
+from models.document import Document, GradingResult
+from vector_store import SimpleVectorStore
+from embeddings import EmbeddingGenerator
 
 logger = structlog.get_logger(__name__)
 
